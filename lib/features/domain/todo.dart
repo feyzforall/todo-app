@@ -1,7 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
-import '../../product/colors.dart';
 import '../../product/hive_constants.dart';
 
 part 'todo.g.dart';
@@ -18,14 +16,14 @@ class Todo extends HiveObject {
   String? description;
   @HiveField(3)
   bool isCompleted;
-  @HiveField(4)
-  Color? color;
+  // @HiveField(4)
+  // Color? color;
 
   Todo({
     required this.id,
     required this.title,
     this.description,
     this.isCompleted = false,
-    this.color = AppColors.slateBlue,
+    // this.color = AppColors.slateBlue,
   });
 }
