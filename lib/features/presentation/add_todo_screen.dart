@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../product/colors.dart';
 import '../../product/dependency_injection.dart';
 import '../../product/dimensions.dart';
+import '../application/color_notifier.dart';
 import '../data/todo_repository.dart';
 import '../domain/todo.dart';
 import 'widgets/bottom_navigation_bar.dart';
@@ -39,10 +41,12 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
           color: Colors.black,
         ),
       ),
-      bottomNavigationBar: CustomBottomNavigationBar(
-        onPressed: () {
-          _addTodo(context);
-        },
+      bottomNavigationBar: Consumer(
+        builder: (context, ref, child) => CustomBottomNavigationBar(
+          onPressed: () {
+            _addTodo(context, ref);
+          },
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(Dimensions.pagePadding),
@@ -60,7 +64,7 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
     );
   }
 
-  void _addTodo(BuildContext context) {
+  void _addTodo(BuildContext context, WidgetRef ref) {
     if (_formKey.currentState!.validate()) {
       var uuid = const Uuid();
       getIt.get<TodoRepository>().addTodo(
@@ -69,6 +73,7 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
               title: titleController.text,
               description: descriptionController.text,
               createdDate: DateTime.now(),
+              color: ref.watch(colorProvider).key,
             ),
           );
       Navigator.of(context).pop();

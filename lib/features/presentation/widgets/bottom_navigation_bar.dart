@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../product/colors.dart';
-
-const List<Color> todoColors = [
-  AppColors.tartOrange,
-  AppColors.slateBlue,
-  AppColors.darkOrchid,
-  AppColors.mountainMeadow,
-];
+import '../../application/color_notifier.dart';
 
 class CustomBottomNavigationBar extends StatelessWidget {
   const CustomBottomNavigationBar({super.key, required this.onPressed});
@@ -23,23 +18,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Row(
-            children: [
-              for (var color in todoColors)
-                Padding(
-                  padding: const EdgeInsets.only(right: 12.0),
-                  child: Container(
-                    width: 25,
-                    height: 25,
-                    decoration: BoxDecoration(
-                      color: color,
-                      shape: BoxShape.circle,
-                      border: Border.all(),
-                    ),
-                  ),
-                ),
-            ],
-          ),
+          _colorRow(),
           TextButton(
             onPressed: () {
               onPressed();
@@ -51,6 +30,35 @@ class CustomBottomNavigationBar extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  Row _colorRow() {
+    return Row(
+      children: [
+        for (var color in AppColors.todoColors.entries)
+          Padding(
+            padding: const EdgeInsets.only(right: 12.0),
+            child: Consumer(
+              builder: (BuildContext context, WidgetRef ref, Widget? child) {
+                return GestureDetector(
+                  onTap: () {
+                    ref.read(colorProvider.notifier).selectColor(color);
+                  },
+                  child: AnimatedContainer(
+                    width: color.key == ref.watch(colorProvider).key ? 30 : 25,
+                    height: color.key == ref.watch(colorProvider).key ? 30 : 25,
+                    decoration: BoxDecoration(
+                      color: color.value,
+                      shape: BoxShape.circle,
+                    ),
+                    duration: const Duration(milliseconds: 300),
+                  ),
+                );
+              },
+            ),
+          ),
+      ],
     );
   }
 }

@@ -55,6 +55,14 @@ dependencies:
   # such as the temp and app data directories.
   path_provider: ^2.0.14
 
+  # A simple way to access state from anywhere in your application while robust and testable.
+  riverpod: ^2.3.6
+  flutter_riverpod: ^2.3.6
+  hooks_riverpod: ^2.3.6
+
+  # A wrapper around InheritedWidget to make them easier to use and more reusable.
+  provider: ^6.0.5
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
