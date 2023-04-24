@@ -8,4 +8,6 @@ class HiveConstants {
   HiveConstants._internal();
 
   static const int todoTypeId = 0;
+
+  static const String todoBox = 'todoBox';
 }
