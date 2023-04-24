@@ -19,6 +19,8 @@ class Todo extends HiveObject {
   bool isCompleted;
   @HiveField(4)
   String color;
+  @HiveField(5)
+  DateTime createdDate;
 
   Todo({
     required this.id,
@@ -26,5 +28,6 @@ class Todo extends HiveObject {
     this.description,
     this.isCompleted = false,
     this.color = AppColors.slateBlueString,
+    required this.createdDate,
   });
 }

@@ -6,7 +6,7 @@ import '../domain/todo.dart';
 class TodoRepository {
   var box = Hive.box<Todo>(HiveConstants.todoBox);
 
-  void addTodo(Todo todo) => box.put(HiveConstants.todoBoxKey, todo);
+  void addTodo(Todo todo) => box.put(todo.id, todo);
 
   void deleteTodo(Todo todo) => box.deleteAt(0);
 }

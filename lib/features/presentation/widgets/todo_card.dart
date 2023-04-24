@@ -13,6 +13,7 @@ class TodoCard extends StatelessWidget {
     return Container(
       width: MediaQuery.of(context).size.width,
       height: 55,
+      padding: const EdgeInsets.all(6.0),
       decoration: BoxDecoration(
         color: todo.color.toColor(),
         borderRadius: BorderRadius.circular(5.0),
@@ -28,13 +29,37 @@ class TodoCard extends StatelessWidget {
           const SizedBox(width: 15),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(todo.title),
-              todo.description != null ? Text(todo.description!) : const SizedBox(),
+              _title(context),
+              _description(context),
             ],
           )
         ],
       ),
     );
+  }
+
+  Text _title(BuildContext context) {
+    return Text(
+      todo.title,
+      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+            color: Colors.white,
+          ),
+    );
+  }
+
+  Widget _description(BuildContext context) {
+    if (todo.description != null && todo.description!.isNotEmpty) {
+      return Text(
+        todo.description!,
+        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              color: Colors.white,
+              fontWeight: FontWeight.w200,
+            ),
+      );
+    } else {
+      return const SizedBox();
+    }
   }
 }
