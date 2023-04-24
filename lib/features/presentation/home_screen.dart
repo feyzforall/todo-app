@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
+import '../../product/dependency_injection.dart';
 import '../../product/hive_constants.dart';
+import '../data/todo_repository.dart';
 import '../domain/todo.dart';
+import 'widgets/todo_card.dart';
 
 class HomeScren extends StatefulWidget {
   const HomeScren({super.key});
@@ -24,7 +27,11 @@ class _HomeScrenState extends State<HomeScren> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          getIt.get<TodoRepository>().addTodo(
+                Todo(id: "id", title: "title"),
+              );
+        },
       ),
       body: ValueListenableBuilder(
         valueListenable: todoBox.listenable(),
@@ -41,9 +48,7 @@ class _HomeScrenState extends State<HomeScren> {
         itemCount: todoBox.length,
         itemBuilder: (BuildContext context, int index) {
           var todo = todoBox.getAt(index);
-          return ListTile(
-            title: Text(todo!.title),
-          );
+          return TodoCard(todo: todo!);
         },
       );
     } else {

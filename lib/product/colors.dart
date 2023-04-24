@@ -9,5 +9,6 @@ class AppColors {
 
   AppColors._internal();
 
+  static const String slateBlueString = "6661DC";
   static const Color slateBlue = Color(0xFF6661DC);
 }
