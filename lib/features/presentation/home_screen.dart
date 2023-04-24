@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-import '../../product/dependency_injection.dart';
+import '../../product/colors.dart';
+import '../../product/dimensions.dart';
 import '../../product/hive_constants.dart';
-import '../data/todo_repository.dart';
 import '../domain/todo.dart';
+import 'add_todo_screen.dart';
 import 'widgets/todo_card.dart';
 
 class HomeScren extends StatefulWidget {
@@ -26,30 +27,73 @@ class _HomeScrenState extends State<HomeScren> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          getIt.get<TodoRepository>().addTodo(
-                Todo(id: "id", title: "title"),
-              );
-        },
+      floatingActionButton: _floatingActionButton(context),
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.transparent,
       ),
-      body: ValueListenableBuilder(
-        valueListenable: todoBox.listenable(),
-        builder: (context, box, widget) {
-          return _homeScreenBody(todoBox);
-        },
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(Dimensions.pagePadding),
+          child: ValueListenableBuilder(
+            valueListenable: todoBox.listenable(),
+            builder: (context, box, widget) {
+              return _homeScreenBody(todoBox);
+            },
+          ),
+        ),
       ),
+    );
+  }
+
+  FloatingActionButton _floatingActionButton(BuildContext context) {
+    return FloatingActionButton(
+      backgroundColor: AppColors.arsenic,
+      child: const Icon(Icons.add, size: 40),
+      onPressed: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (BuildContext context) => const AddTodoScreen(),
+          ),
+        );
+      },
     );
   }
 
   Widget _homeScreenBody(Box<Todo> todoBox) {
     if (todoBox.isNotEmpty) {
-      return ListView.builder(
-        itemCount: todoBox.length,
-        itemBuilder: (BuildContext context, int index) {
-          var todo = todoBox.getAt(index);
-          return TodoCard(todo: todo!);
-        },
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "Yapılacaklar",
+            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
+          ),
+          const Divider(),
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.55,
+            child: ListView.builder(
+              shrinkWrap: true,
+              itemCount: todoBox.length,
+              itemBuilder: (BuildContext context, int index) {
+                var todo = todoBox.getAt(index);
+                return Padding(
+                  padding: const EdgeInsets.only(bottom: 5.0),
+                  child: TodoCard(todo: todo!),
+                );
+              },
+            ),
+          ),
+          Text(
+            "Tamamlanan",
+            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
+          ),
+          const Divider(),
+        ],
       );
     } else {
       return const SizedBox();
