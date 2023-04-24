@@ -39,6 +39,10 @@ dependencies:
   # RFC4122 (v1, v4, v5) UUID Generator and Parser for all Dart platforms (Web, VM, Flutter)
   uuid: ^3.0.7
 
+  # Lightweight and blazing fast key-value database written in pure Dart. 
+  # Strongly encrypted using AES-256.
+  hive: ^2.2.3
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -49,6 +53,12 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
+
+  # Extension for Hive. Automatically generates TypeAdapters to store any class.
+  hive_generator: ^2.0.0
+
+  # A build system for Dart code generation and modular compilation.
+  build_runner: ^2.3.3
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
