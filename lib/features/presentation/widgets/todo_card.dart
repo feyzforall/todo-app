@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
+import '../../../product/assets.dart';
 import '../../../product/color_extension.dart';
+import '../../../product/colors.dart';
 import '../../domain/todo.dart';
 
 class TodoCard extends StatelessWidget {
@@ -13,26 +16,42 @@ class TodoCard extends StatelessWidget {
     return Container(
       width: MediaQuery.of(context).size.width,
       height: 55,
-      padding: const EdgeInsets.all(6.0),
       decoration: BoxDecoration(
-        color: todo.color.toColor(),
-        borderRadius: BorderRadius.circular(5.0),
+        color: AppColors.cultured,
+        borderRadius: BorderRadius.circular(7.0),
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Icon(
-            Icons.circle_outlined,
-            size: 28,
-            color: Colors.white,
+          Padding(
+            padding: const EdgeInsets.only(left: 8.0),
+            child: Row(
+              children: [
+                const Icon(
+                  Icons.circle_outlined,
+                  size: 28,
+                  color: Colors.black,
+                ),
+                const SizedBox(width: 15),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _title(context),
+                    _description(context),
+                  ],
+                ),
+              ],
+            ),
           ),
-          const SizedBox(width: 15),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
+          Row(
             children: [
-              _title(context),
-              _description(context),
+              SvgPicture.asset(
+                Assets.starIcon,
+                width: 20,
+              ),
+              const SizedBox(width: 10),
+              _colorBand(),
             ],
           )
         ],
@@ -43,9 +62,7 @@ class TodoCard extends StatelessWidget {
   Text _title(BuildContext context) {
     return Text(
       todo.title,
-      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-            color: Colors.white,
-          ),
+      style: Theme.of(context).textTheme.labelMedium,
     );
   }
 
@@ -53,13 +70,24 @@ class TodoCard extends StatelessWidget {
     if (todo.description != null && todo.description!.isNotEmpty) {
       return Text(
         todo.description!,
-        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              color: Colors.white,
-              fontWeight: FontWeight.w200,
-            ),
+        style: Theme.of(context).textTheme.labelSmall,
       );
     } else {
       return const SizedBox();
     }
+  }
+
+  Container _colorBand() {
+    return Container(
+      width: 20,
+      height: 55,
+      decoration: BoxDecoration(
+        color: todo.color.toColor(),
+        borderRadius: const BorderRadius.only(
+          topRight: Radius.circular(7.0),
+          bottomRight: Radius.circular(7.0),
+        ),
+      ),
+    );
   }
 }

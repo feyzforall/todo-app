@@ -66,6 +66,10 @@ dependencies:
   # A Flutter package to use fonts from fonts.google.com. Supports HTTP fetching, caching, and asset bundling.
   google_fonts: ^4.0.3
 
+  # An SVG rendering and widget library for Flutter, which allows 
+  # painting and displaying Scalable Vector Graphics 1.1 files.
+  flutter_svg: ^2.0.5
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -96,10 +100,8 @@ flutter:
   # the material Icons class.
   uses-material-design: true
 
-  # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+  assets:
+    - assets/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
