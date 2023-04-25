@@ -7,6 +7,7 @@ import 'features/domain/todo.dart';
 import 'features/presentation/home_screen.dart';
 import 'product/dependency_injection.dart' as injector;
 import 'product/hive_constants.dart';
+import 'product/theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -29,9 +30,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: 'TODO',
-      home: HomeScren(),
+      theme: lightTheme,
+      darkTheme: lightTheme,
+      home: const HomeScren(),
     );
   }
 }

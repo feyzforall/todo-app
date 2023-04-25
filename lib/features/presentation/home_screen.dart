@@ -66,10 +66,8 @@ class _HomeScrenState extends State<HomeScren> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Yapılacaklar",
-            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
+            "YAPILACAKLAR",
+            style: Theme.of(context).textTheme.titleLarge,
           ),
           const Divider(),
           SizedBox(
@@ -87,10 +85,8 @@ class _HomeScrenState extends State<HomeScren> {
             ),
           ),
           Text(
-            "Tamamlanan",
-            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
+            "TAMAMLANAN",
+            style: Theme.of(context).textTheme.titleLarge,
           ),
           const Divider(),
         ],
