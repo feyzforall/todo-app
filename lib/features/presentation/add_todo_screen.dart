@@ -9,6 +9,7 @@ import '../application/color_notifier.dart';
 import '../data/todo_repository.dart';
 import '../domain/todo.dart';
 import 'widgets/bottom_navigation_bar.dart';
+import 'widgets/leading_button.dart';
 
 class AddTodoScreen extends StatefulWidget {
   const AddTodoScreen({super.key, this.todo});
@@ -37,11 +38,7 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        leading: IconButton(
-          onPressed: () => Navigator.of(context).pop(),
-          icon: const Icon(Icons.chevron_left_outlined),
-          color: Colors.black,
-        ),
+        leading: const LeadingButton(),
       ),
       bottomNavigationBar: Consumer(
         builder: (context, ref, child) => CustomBottomNavigationBar(
@@ -102,6 +99,7 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
     return TextFormField(
       maxLength: 25,
       controller: titleController,
+      style: Theme.of(context).textTheme.headlineSmall,
       validator: (value) {
         if (value == null || value.isEmpty) {
           return 'Please enter some text';

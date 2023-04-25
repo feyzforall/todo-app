@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 ThemeData lightTheme = ThemeData(
   brightness: Brightness.light,
   scaffoldBackgroundColor: Colors.white,
+  fontFamily: GoogleFonts.openSans().fontFamily,
   textTheme: TextTheme(
     // 22px : ("Yapılacaklar", "Tamamlanan" gibi başlıklarda kullanılıyor)
     titleLarge: TextStyle(

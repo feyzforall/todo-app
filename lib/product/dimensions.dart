@@ -7,5 +7,5 @@ class Dimensions {
 
   Dimensions._internal();
 
-  static const double pagePadding = 16.0;
+  static const double pagePadding = 24.0;
 }
