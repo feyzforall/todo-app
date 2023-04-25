@@ -20,11 +20,13 @@ class HomeScren extends StatefulWidget {
 
 class _HomeScrenState extends State<HomeScren> {
   late Box<Todo> todoBox;
+  late Box<Todo> completedTodoBox;
 
   @override
   void initState() {
     super.initState();
     todoBox = Hive.box<Todo>(HiveConstants.todoBox);
+    completedTodoBox = Hive.box<Todo>(HiveConstants.completedTodoBox);
   }
 
   @override
@@ -40,9 +42,7 @@ class _HomeScrenState extends State<HomeScren> {
           padding: const EdgeInsets.all(Dimensions.pagePadding),
           child: ValueListenableBuilder(
             valueListenable: todoBox.listenable(),
-            builder: (context, box, widget) {
-              return _homeScreenBody(todoBox);
-            },
+            builder: (context, box, widget) => _body(),
           ),
         ),
       ),
@@ -63,66 +63,82 @@ class _HomeScrenState extends State<HomeScren> {
     );
   }
 
-  Widget _homeScreenBody(Box<Todo> todoBox) {
-    if (todoBox.isNotEmpty) {
+  Widget _body() {
+    if (completedTodoBox.isEmpty) {
+      return _todoSection();
+    } else {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            "YAPILACAKLAR",
-            style: Theme.of(context).textTheme.titleLarge,
-          ),
-          const Divider(),
-          _todos(todoBox),
+          Expanded(flex: 60, child: _todoSection()),
           Text(
             "TAMAMLANAN",
             style: Theme.of(context).textTheme.titleLarge,
           ),
           const Divider(),
-          _completedTodos(todoBox),
+          Expanded(flex: 30, child: _completedTodos(todoBox)),
         ],
       );
-    } else {
-      return const SizedBox();
     }
   }
 
-  SizedBox _todos(Box<Todo> todoBox) {
-    return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.5,
-      child: ListView(
-        children: [
-          for (var todo in todoBox.values.where((element) => element.isCompleted == false).toList())
-            Padding(
-              padding: const EdgeInsets.only(bottom: 5.0),
-              child: Dismissible(
-                key: Key(todo.id),
-                onDismissed: (direction) => getIt.get<TodoRepository>().deleteTodo(todo),
-                child: TodoCard(todo: todo),
+  Widget _todoSection() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "YAPILACAKLAR",
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
+        const Divider(),
+        todoBox.isNotEmpty
+            ? _todos(todoBox)
+            : Center(
+                child: Column(
+                  children: [
+                    const SizedBox(height: 50),
+                    Text(
+                      'Yapılacak bir şey yok',
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                            fontSize: 20,
+                            color: AppColors.lightSilver,
+                          ),
+                    ),
+                  ],
+                ),
               ),
-            )
-        ],
-      ),
+      ],
     );
   }
 
-  Expanded _completedTodos(Box<Todo> todoBox) {
-    return Expanded(
-      child: SizedBox(
-        child: ListView(
-          children: [
-            for (var todo in todoBox.values.where((element) => element.isCompleted == true).toList())
-              Padding(
-                padding: const EdgeInsets.only(bottom: 5.0),
-                child: Dismissible(
-                  key: Key(todo.id),
-                  onDismissed: (direction) => getIt.get<TodoRepository>().deleteTodo(todo),
-                  child: CompletedTodoCard(todo: todo),
-                ),
-              )
-          ],
-        ),
-      ),
+  ListView _todos(Box<Todo> todoBox) {
+    return ListView(
+      shrinkWrap: true,
+      children: [
+        for (var todo in todoBox.values.where((element) => element.isCompleted == false).toList())
+          Padding(
+            padding: const EdgeInsets.only(bottom: 5.0),
+            child: Dismissible(
+              key: UniqueKey(),
+              onDismissed: (direction) => getIt.get<TodoRepository>().deleteTodo(todo),
+              child: TodoCard(todo: todo),
+            ),
+          )
+      ],
+    );
+  }
+
+  ListView _completedTodos(Box<Todo> todoBox) {
+    return ListView(
+      shrinkWrap: true,
+      children: [
+        for (var todo in completedTodoBox.values)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 5.0),
+            child: CompletedTodoCard(todo: todo),
+          )
+      ],
     );
   }
 }

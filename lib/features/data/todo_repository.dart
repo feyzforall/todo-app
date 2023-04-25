@@ -4,15 +4,16 @@ import '../../product/hive_constants.dart';
 import '../domain/todo.dart';
 
 class TodoRepository {
-  var box = Hive.box<Todo>(HiveConstants.todoBox);
+  var todoBox = Hive.box<Todo>(HiveConstants.todoBox);
+  var completedTodoBox = Hive.box<Todo>(HiveConstants.completedTodoBox);
 
-  void addTodo(Todo todo) => box.put(todo.id, todo);
+  void addTodo(Todo todo) => todoBox.put(todo.id, todo);
 
-  void deleteTodo(Todo todo) => box.deleteAt(0);
+  void deleteTodo(Todo todo) => todoBox.delete(todo.id);
 
   void updateTodo(Todo todo) {
-    box.delete(todo.id);
-    box.put(
+    todoBox.delete(todo.id);
+    todoBox.put(
       todo.id,
       todo.copyWith(
         todo: todo,
@@ -25,9 +26,9 @@ class TodoRepository {
   // TODO : isCompleted ve isFavorite için iki farklı copyWith
   // tarzı metod yazılabilir. Bu biraz saçma geldi, bakacağız.
   void addFavorite(Todo todo) {
-    box.delete(todo.id);
+    todoBox.delete(todo.id);
     if (todo.isFavorite) {
-      box.put(
+      todoBox.put(
         todo.id,
         todo.copyWith(
           todo: todo,
@@ -36,7 +37,7 @@ class TodoRepository {
         ),
       );
     } else {
-      box.put(
+      todoBox.put(
         todo.id,
         todo.copyWith(
           todo: todo,
@@ -48,15 +49,7 @@ class TodoRepository {
   }
 
   void completeTodo(Todo todo) {
-    box.delete(todo.id);
-    box.put(
-      todo.id,
-      todo.copyWith(
-        todo: todo,
-        isFavorite: todo.isFavorite,
-        isCompleted: true,
-      ),
-    );
-    print(todo.isCompleted);
+    todoBox.delete(todo.id);
+    completedTodoBox.put(todo.id, todo);
   }
 }

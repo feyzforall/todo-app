@@ -18,6 +18,7 @@ void main() async {
     ..registerAdapter(TodoAdapter());
   Hive.initFlutter();
   await Hive.openBox<Todo>(HiveConstants.todoBox);
+  await Hive.openBox<Todo>(HiveConstants.completedTodoBox);
   runApp(
     const ProviderScope(
       child: MyApp(),

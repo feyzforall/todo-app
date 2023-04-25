@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:uuid/uuid.dart';
 
+import '../../product/color_extension.dart';
 import '../../product/colors.dart';
 import '../../product/dependency_injection.dart';
 import '../../product/dimensions.dart';
@@ -54,7 +54,7 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
           key: _formKey,
           child: Column(
             children: [
-              _titleField(context),
+              _titleField(context, widget.todo),
               const Divider(),
               _descriptionField(context),
             ],
@@ -66,10 +66,9 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
 
   void _addTodo(WidgetRef ref) {
     if (_formKey.currentState!.validate()) {
-      var uuid = const Uuid();
       getIt.get<TodoRepository>().addTodo(
             Todo(
-              id: uuid.v1(),
+              id: UniqueKey().toString(),
               title: titleController.text,
               description: descriptionController.text,
               createdDate: DateTime.now(),
@@ -95,21 +94,21 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
     }
   }
 
-  TextFormField _titleField(BuildContext context) {
+  TextFormField _titleField(BuildContext context, Todo? todo) {
     return TextFormField(
       maxLength: 25,
       controller: titleController,
       style: Theme.of(context).textTheme.headlineSmall,
       validator: (value) {
         if (value == null || value.isEmpty) {
-          return 'Please enter some text';
+          return 'Bir şeyler yazman lazım';
         }
         return null;
       },
       decoration: InputDecoration(
-        prefixIcon: const Icon(
-          Icons.circle_outlined,
-          color: AppColors.lightGray,
+        prefixIcon: Icon(
+          todo != null ? Icons.circle : Icons.circle_outlined,
+          color: todo != null ? todo.color.toColor() : AppColors.lightGray,
         ),
         border: InputBorder.none,
         counterText: "",
