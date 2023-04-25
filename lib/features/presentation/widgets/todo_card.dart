@@ -4,6 +4,8 @@ import 'package:flutter_svg/svg.dart';
 import '../../../product/assets.dart';
 import '../../../product/color_extension.dart';
 import '../../../product/colors.dart';
+import '../../../product/dependency_injection.dart';
+import '../../data/todo_repository.dart';
 import '../../domain/todo.dart';
 
 class TodoCard extends StatelessWidget {
@@ -46,9 +48,12 @@ class TodoCard extends StatelessWidget {
           ),
           Row(
             children: [
-              SvgPicture.asset(
-                Assets.starIcon,
-                width: 20,
+              GestureDetector(
+                onTap: () => getIt.get<TodoRepository>().toggleFavorite(todo),
+                child: SvgPicture.asset(
+                  todo.isFavorite ? Assets.filledStarIcon : Assets.starIcon,
+                  width: 20,
+                ),
               ),
               const SizedBox(width: 10),
               _colorBand(),

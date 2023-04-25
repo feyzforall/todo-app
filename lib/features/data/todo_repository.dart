@@ -9,4 +9,13 @@ class TodoRepository {
   void addTodo(Todo todo) => box.put(todo.id, todo);
 
   void deleteTodo(Todo todo) => box.deleteAt(0);
+
+  void toggleFavorite(Todo todo) {
+    box.delete(todo.id);
+    if (todo.isFavorite) {
+      box.put(todo.id, todo.copyWith(todo: todo, isFavorite: false));
+    } else {
+      box.put(todo.id, todo.copyWith(todo: todo, isFavorite: true));
+    }
+  }
 }
