@@ -20,6 +20,8 @@ class AppColors {
   static const Color mountainMeadow = Color(0xFF31BB92);
   static const Color arsenic = Color(0xFF38374C);
   static const Color lightGray = Color(0xFFD3D3D3);
+  static const Color lightSilver = Color(0xFFD6D6D6);
+  static const Color silverFoil = Color(0xFFAEAEAE);
   static const Color cultured = Color(0xFFF8F8F8);
 
   static const Map<String, Color> todoColors = {
