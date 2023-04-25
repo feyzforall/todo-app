@@ -10,6 +10,18 @@ class TodoRepository {
 
   void deleteTodo(Todo todo) => box.deleteAt(0);
 
+  void updateTodo(Todo todo) {
+    box.delete(todo.id);
+    box.put(
+      todo.id,
+      todo.copyWith(
+        todo: todo,
+        isFavorite: todo.isFavorite,
+        isCompleted: todo.isCompleted,
+      ),
+    );
+  }
+
   // TODO : isCompleted ve isFavorite için iki farklı copyWith
   // tarzı metod yazılabilir. Bu biraz saçma geldi, bakacağız.
   void addFavorite(Todo todo) {

@@ -5,9 +5,10 @@ import '../../../product/colors.dart';
 import '../../application/color_notifier.dart';
 
 class CustomBottomNavigationBar extends StatelessWidget {
-  const CustomBottomNavigationBar({super.key, required this.onPressed});
+  const CustomBottomNavigationBar({super.key, required this.onPressed, required this.text});
 
   final VoidCallback onPressed;
+  final String text;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +25,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
               onPressed();
             },
             child: Text(
-              'Ekle',
+              text,
               style: Theme.of(context).textTheme.titleLarge,
             ),
           ),

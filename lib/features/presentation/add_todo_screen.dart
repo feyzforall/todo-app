@@ -11,7 +11,9 @@ import '../domain/todo.dart';
 import 'widgets/bottom_navigation_bar.dart';
 
 class AddTodoScreen extends StatefulWidget {
-  const AddTodoScreen({super.key});
+  const AddTodoScreen({super.key, this.todo});
+
+  final Todo? todo;
 
   @override
   State<AddTodoScreen> createState() => _AddTodoScreenState();
@@ -24,8 +26,8 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
 
   @override
   void initState() {
-    titleController = TextEditingController();
-    descriptionController = TextEditingController();
+    titleController = TextEditingController(text: widget.todo?.title);
+    descriptionController = TextEditingController(text: widget.todo?.description);
     super.initState();
   }
 
@@ -43,8 +45,9 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
       ),
       bottomNavigationBar: Consumer(
         builder: (context, ref, child) => CustomBottomNavigationBar(
+          text: widget.todo != null ? "Kaydet" : "Ekle",
           onPressed: () {
-            _addTodo(context, ref);
+            widget.todo == null ? _addTodo(ref) : _updateTodo(ref, widget.todo!);
           },
         ),
       ),
@@ -64,7 +67,7 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
     );
   }
 
-  void _addTodo(BuildContext context, WidgetRef ref) {
+  void _addTodo(WidgetRef ref) {
     if (_formKey.currentState!.validate()) {
       var uuid = const Uuid();
       getIt.get<TodoRepository>().addTodo(
@@ -73,6 +76,21 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
               title: titleController.text,
               description: descriptionController.text,
               createdDate: DateTime.now(),
+              color: ref.watch(colorProvider).key,
+            ),
+          );
+      Navigator.of(context).pop();
+    }
+  }
+
+  void _updateTodo(WidgetRef ref, Todo todo) {
+    if (_formKey.currentState!.validate()) {
+      getIt.get<TodoRepository>().updateTodo(
+            Todo(
+              id: todo.id,
+              title: titleController.text,
+              description: descriptionController.text,
+              createdDate: todo.createdDate,
               color: ref.watch(colorProvider).key,
             ),
           );
