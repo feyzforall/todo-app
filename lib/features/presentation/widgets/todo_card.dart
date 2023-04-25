@@ -76,7 +76,7 @@ class TodoCard extends StatelessWidget {
   Text _title(BuildContext context) {
     return Text(
       todo.title,
-      style: Theme.of(context).textTheme.labelMedium,
+      style: Theme.of(context).textTheme.labelLarge,
     );
   }
 

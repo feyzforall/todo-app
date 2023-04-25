@@ -14,7 +14,7 @@ ThemeData lightTheme = ThemeData(
     // 12px : TodoCard adlı widgetta title bu fontu kullanıyor.
     // TODO: Tasarımda başka bir font family var ama kütüphanede
     // o font yok. Konuşulacak.
-    labelMedium: TextStyle(
+    labelLarge: TextStyle(
       fontFamily: GoogleFonts.openSans().fontFamily,
       fontWeight: FontWeight.w300,
     ),
