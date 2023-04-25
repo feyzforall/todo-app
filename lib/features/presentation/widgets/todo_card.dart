@@ -29,10 +29,11 @@ class TodoCard extends StatelessWidget {
             padding: const EdgeInsets.only(left: 8.0),
             child: Row(
               children: [
-                const Icon(
-                  Icons.circle_outlined,
-                  size: 28,
-                  color: Colors.black,
+                GestureDetector(
+                  onTap: () {
+                    getIt.get<TodoRepository>().completeTodo(todo);
+                  },
+                  child: SvgPicture.asset(Assets.circleIcon),
                 ),
                 const SizedBox(width: 15),
                 Column(
@@ -49,7 +50,7 @@ class TodoCard extends StatelessWidget {
           Row(
             children: [
               GestureDetector(
-                onTap: () => getIt.get<TodoRepository>().toggleFavorite(todo),
+                onTap: () => getIt.get<TodoRepository>().addFavorite(todo),
                 child: SvgPicture.asset(
                   todo.isFavorite ? Assets.filledStarIcon : Assets.starIcon,
                   width: 20,

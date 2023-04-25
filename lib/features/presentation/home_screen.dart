@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import '../../product/colors.dart';
+import '../../product/dependency_injection.dart';
 import '../../product/dimensions.dart';
 import '../../product/hive_constants.dart';
+import '../data/todo_repository.dart';
 import '../domain/todo.dart';
 import 'add_todo_screen.dart';
 import 'widgets/todo_card.dart';
@@ -71,17 +73,19 @@ class _HomeScrenState extends State<HomeScren> {
           ),
           const Divider(),
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.55,
-            child: ListView.builder(
-              shrinkWrap: true,
-              itemCount: todoBox.length,
-              itemBuilder: (BuildContext context, int index) {
-                var todo = todoBox.getAt(index);
-                return Padding(
-                  padding: const EdgeInsets.only(bottom: 5.0),
-                  child: TodoCard(todo: todo!),
-                );
-              },
+            height: MediaQuery.of(context).size.height * 0.5,
+            child: ListView(
+              children: [
+                for (var todo in todoBox.values.where((element) => element.isCompleted == false).toList())
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 5.0),
+                    child: Dismissible(
+                      key: Key(todo.id),
+                      onDismissed: (direction) => getIt.get<TodoRepository>().deleteTodo(todo),
+                      child: TodoCard(todo: todo),
+                    ),
+                  )
+              ],
             ),
           ),
           Text(
@@ -89,6 +93,23 @@ class _HomeScrenState extends State<HomeScren> {
             style: Theme.of(context).textTheme.titleLarge,
           ),
           const Divider(),
+          Expanded(
+            child: SizedBox(
+              child: ListView(
+                children: [
+                  for (var todo in todoBox.values.where((element) => element.isCompleted == true).toList())
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 5.0),
+                      child: Dismissible(
+                        key: Key(todo.id),
+                        onDismissed: (direction) => getIt.get<TodoRepository>().deleteTodo(todo),
+                        child: TodoCard(todo: todo),
+                      ),
+                    )
+                ],
+              ),
+            ),
+          ),
         ],
       );
     } else {

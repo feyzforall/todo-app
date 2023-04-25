@@ -10,12 +10,41 @@ class TodoRepository {
 
   void deleteTodo(Todo todo) => box.deleteAt(0);
 
-  void toggleFavorite(Todo todo) {
+  // TODO : isCompleted ve isFavorite için iki farklı copyWith
+  // tarzı metod yazılabilir. Bu biraz saçma geldi, bakacağız.
+  void addFavorite(Todo todo) {
     box.delete(todo.id);
     if (todo.isFavorite) {
-      box.put(todo.id, todo.copyWith(todo: todo, isFavorite: false));
+      box.put(
+        todo.id,
+        todo.copyWith(
+          todo: todo,
+          isFavorite: false,
+          isCompleted: todo.isCompleted,
+        ),
+      );
     } else {
-      box.put(todo.id, todo.copyWith(todo: todo, isFavorite: true));
+      box.put(
+        todo.id,
+        todo.copyWith(
+          todo: todo,
+          isFavorite: true,
+          isCompleted: todo.isCompleted,
+        ),
+      );
     }
+  }
+
+  void completeTodo(Todo todo) {
+    box.delete(todo.id);
+    box.put(
+      todo.id,
+      todo.copyWith(
+        todo: todo,
+        isFavorite: todo.isFavorite,
+        isCompleted: true,
+      ),
+    );
+    print(todo.isCompleted);
   }
 }

@@ -34,11 +34,11 @@ class Todo extends HiveObject {
     this.isFavorite = false,
   });
 
-  Todo copyWith({required Todo todo, required bool isFavorite}) => Todo(
+  Todo copyWith({required Todo todo, required bool isFavorite, required bool isCompleted}) => Todo(
         id: todo.id,
         title: todo.title,
         description: todo.description,
-        isCompleted: todo.isCompleted,
+        isCompleted: isCompleted,
         createdDate: todo.createdDate,
         isFavorite: isFavorite,
         color: todo.color,
