@@ -23,7 +23,7 @@ class TodoCard extends StatelessWidget {
         children: [
           const Icon(
             Icons.circle_outlined,
-            size: 32,
+            size: 28,
             color: Colors.white,
           ),
           const SizedBox(width: 15),
