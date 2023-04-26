@@ -49,13 +49,13 @@ flutter pub get
  - Premium tema varsa ortada bir satın alma da olması gerekiyor. Bu yüzden uygulama için satın alım eklenecek.
  - Uygulama içi satın alım olacağı için de üyelikle alakalı bir geliştirme yapılması gerekiyor. Backend developera paramız yetmediği için bu işlemi Firebase tarafında halletmeyi düşünüyoruz.(Merak etme, uygulamayı üyeliksiz kullanmaya devam edebileceksin)
 
+<p float="left">
+   <img src="https://user-images.githubusercontent.com/30154300/234570208-41a68be4-0404-4cfc-81c8-016f1559fb58.png" width=420>
 
+   <img src="https://user-images.githubusercontent.com/30154300/234570213-646f9324-a0f0-450d-9e5a-5cb5e73d5187.png" width=420>
 
-<img src="https://user-images.githubusercontent.com/30154300/234570208-41a68be4-0404-4cfc-81c8-016f1559fb58.png" width=420>
-
-<img src="https://user-images.githubusercontent.com/30154300/234570213-646f9324-a0f0-450d-9e5a-5cb5e73d5187.png" width=420>
-
-<img src="https://user-images.githubusercontent.com/30154300/234570215-3dd1812b-3cca-4464-aea8-8229af036e10.png" width=420>
+   <img src="https://user-images.githubusercontent.com/30154300/234570215-3dd1812b-3cca-4464-aea8-8229af036e10.png" width=420>  
+</p>
 
 <img src="https://user-images.githubusercontent.com/30154300/234570218-2d17f797-630e-4537-b42d-337dc40a90c1.png" width=420>
 
