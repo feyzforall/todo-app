@@ -18,6 +18,7 @@ class ThemeSwitchFAB extends StatelessWidget {
         return ValueListenableBuilder(
           valueListenable: Hive.box<bool>(HiveConstants.themeBox).listenable(),
           builder: (BuildContext context, box, Widget? child) {
+            bool isDarkMode = box.get(HiveConstants.themeKey, defaultValue: false)!;
             return Padding(
               padding: const EdgeInsets.only(left: 24.0),
               child: Row(
@@ -25,7 +26,7 @@ class ThemeSwitchFAB extends StatelessWidget {
                   FloatingActionButton(
                     heroTag: "switchThemeOne",
                     mini: true,
-                    backgroundColor: box.get(HiveConstants.themeKey)! ? AppColors.arsenic : AppColors.lightGray,
+                    backgroundColor: isDarkMode ? AppColors.arsenic : AppColors.lightGray,
                     onPressed: () {
                       ref.read(themeProvider.notifier).toggle();
                     },
@@ -35,10 +36,11 @@ class ThemeSwitchFAB extends StatelessWidget {
                     child: FloatingActionButton(
                       mini: true,
                       heroTag: "switchThemeTwo",
-                      backgroundColor: box.get(HiveConstants.themeKey)! ? AppColors.lightGray : AppColors.arsenic,
+                      backgroundColor: isDarkMode ? AppColors.lightGray : AppColors.arsenic,
                       onPressed: () {
                         ref.read(themeProvider.notifier).toggle();
-                        Hive.box<bool>(HiveConstants.themeBox).put(HiveConstants.themeKey, !box.get(HiveConstants.themeKey)!);
+                        Hive.box<bool>(HiveConstants.themeBox)
+                            .put(HiveConstants.themeKey, !box.get(HiveConstants.themeKey, defaultValue: false)!);
                       },
                     ),
                   ),
