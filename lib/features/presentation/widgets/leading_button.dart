@@ -7,8 +7,10 @@ class LeadingButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
       onPressed: () => Navigator.of(context).pop(),
-      icon: const Icon(Icons.chevron_left_outlined),
-      color: Colors.black,
+      icon: Icon(
+        Icons.chevron_left_outlined,
+        color: Theme.of(context).iconTheme.color,
+      ),
     );
   }
 }

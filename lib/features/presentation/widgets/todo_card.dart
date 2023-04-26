@@ -3,7 +3,6 @@ import 'package:flutter_svg/svg.dart';
 
 import '../../../product/assets.dart';
 import '../../../product/color_extension.dart';
-import '../../../product/colors.dart';
 import '../../../product/dependency_injection.dart';
 import '../../data/todo_repository.dart';
 import '../../domain/todo.dart';
@@ -26,7 +25,7 @@ class TodoCard extends StatelessWidget {
         width: MediaQuery.of(context).size.width,
         height: 55,
         decoration: BoxDecoration(
-          color: AppColors.cultured,
+          color: Theme.of(context).cardColor,
           borderRadius: BorderRadius.circular(7.0),
         ),
         child: Row(
@@ -40,7 +39,10 @@ class TodoCard extends StatelessWidget {
                     onTap: () {
                       getIt.get<TodoRepository>().completeTodo(todo);
                     },
-                    child: SvgPicture.asset(Assets.circleIcon),
+                    child: SvgPicture.asset(
+                      Assets.circleIcon,
+                      color: Theme.of(context).iconTheme.color,
+                    ),
                   ),
                   const SizedBox(width: 15),
                   Column(

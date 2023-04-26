@@ -23,7 +23,7 @@ class CompletedTodoCard extends StatelessWidget {
         width: MediaQuery.of(context).size.width,
         height: 55,
         decoration: BoxDecoration(
-          color: AppColors.lightSilver,
+          color: Theme.of(context).disabledColor,
           borderRadius: BorderRadius.circular(7.0),
         ),
         child: Row(

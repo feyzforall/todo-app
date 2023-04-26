@@ -112,8 +112,8 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
         ),
         border: InputBorder.none,
         counterText: "",
-        hintText: "Ne Yapılacak",
-        hintStyle: Theme.of(context).textTheme.titleLarge?.copyWith(
+        hintText: "Ne Yapılacak?",
+        hintStyle: Theme.of(context).textTheme.headlineSmall?.copyWith(
               color: AppColors.lightGray,
             ),
       ),
@@ -128,6 +128,7 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
       keyboardType: TextInputType.multiline,
       minLines: 1,
       maxLines: 15,
+      style: Theme.of(context).textTheme.titleMedium,
       decoration: InputDecoration(
         border: InputBorder.none,
         hintText: 'Açıklama',

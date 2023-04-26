@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../product/assets.dart';
-import '../../product/colors.dart';
 import '../../product/dimensions.dart';
 import '../domain/todo.dart';
 import 'widgets/leading_button.dart';
@@ -15,10 +14,10 @@ class CompletedTodoScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.lightSilver,
+      backgroundColor: Theme.of(context).disabledColor,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: AppColors.lightSilver,
+        backgroundColor: Colors.transparent,
         leading: const LeadingButton(),
       ),
       body: Padding(
