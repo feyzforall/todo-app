@@ -52,7 +52,7 @@ flutter pub get
 ## Ekran Görüntüleri
 
 <p float="left">
-   <img src="https://user-images.githubusercontent.com/30154300/234570208-41a68be4-0404-4cfc-81c8-016f1559fb58.png" width=320 height=100>
+   <img src="https://user-images.githubusercontent.com/30154300/234570208-41a68be4-0404-4cfc-81c8-016f1559fb58.png" width=320>
 
    <img src="https://user-images.githubusercontent.com/30154300/234570213-646f9324-a0f0-450d-9e5a-5cb5e73d5187.png" width=320>
 
