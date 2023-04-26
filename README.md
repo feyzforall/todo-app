@@ -51,7 +51,7 @@ flutter pub get
 
 
 
-![Simulator Screen Shot - iPhone 14 - 2023-04-26 at 15 04 05](https://user-images.githubusercontent.com/30154300/234570208-41a68be4-0404-4cfc-81c8-016f1559fb58.png)
+![Simulator Screen Shot - iPhone 14 - 2023-04-26 at 15 04 05]<img src="https://user-images.githubusercontent.com/30154300/234570208-41a68be4-0404-4cfc-81c8-016f1559fb58.png" width=60>
 ![Simulator Screen Shot - iPhone 14 - 2023-04-26 at 15 04 15](https://user-images.githubusercontent.com/30154300/234570213-646f9324-a0f0-450d-9e5a-5cb5e73d5187.png)
 ![Simulator Screen Shot - iPhone 14 - 2023-04-26 at 15 03 58](https://user-images.githubusercontent.com/30154300/234570215-3dd1812b-3cca-4464-aea8-8229af036e10.png)
 ![Simulator Screen Shot - iPhone 14 - 2023-04-26 at 15 04 27](https://user-images.githubusercontent.com/30154300/234570218-2d17f797-630e-4537-b42d-337dc40a90c1.png)
