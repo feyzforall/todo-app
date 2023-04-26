@@ -53,23 +53,21 @@ flutter pub get
 
 <p float="left">
    <img src="https://user-images.githubusercontent.com/30154300/234570208-41a68be4-0404-4cfc-81c8-016f1559fb58.png" width=320>
-
    <img src="https://user-images.githubusercontent.com/30154300/234570213-646f9324-a0f0-450d-9e5a-5cb5e73d5187.png" width=320>
-
-   <img src="https://user-images.githubusercontent.com/30154300/234570215-3dd1812b-3cca-4464-aea8-8229af036e10.png" width=320>  
 </p>
 
 <p float="left">
+   <img src="https://user-images.githubusercontent.com/30154300/234570215-3dd1812b-3cca-4464-aea8-8229af036e10.png" width=320> 
    <img src="https://user-images.githubusercontent.com/30154300/234570218-2d17f797-630e-4537-b42d-337dc40a90c1.png" width=320>
+</p>
 
+<p float="left">
    <img src="https://user-images.githubusercontent.com/30154300/234570220-f3d819cf-ab01-43f3-9a5b-a12caeb54cff.png" width=320>
-
    <img src="https://user-images.githubusercontent.com/30154300/234570222-8e79aedb-ea45-4c25-be50-129270707a74.png" width=320>
 </p>
 
 <p float="left">
    <img src="https://user-images.githubusercontent.com/30154300/234570224-39b6bec0-782e-4d11-a61f-a62d32d2f36c.png" width=320>
-
    <img src="https://user-images.githubusercontent.com/30154300/234570226-634eb186-a5ad-43ef-92b8-6ca94c8422a3.png" width=320>
 </p>
 
