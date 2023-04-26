@@ -10,6 +10,16 @@ import 'product/hive_constants.dart';
 import 'product/theme.dart';
 
 void main() async {
+  await _initializeMethods();
+
+  runApp(
+    const ProviderScope(
+      child: MyApp(),
+    ),
+  );
+}
+
+Future<void> _initializeMethods() async {
   WidgetsFlutterBinding.ensureInitialized();
   injector.init();
   final appDocumentDirectory = await getApplicationDocumentsDirectory();
@@ -19,11 +29,7 @@ void main() async {
   Hive.initFlutter();
   await Hive.openBox<Todo>(HiveConstants.todoBox);
   await Hive.openBox<Todo>(HiveConstants.completedTodoBox);
-  runApp(
-    const ProviderScope(
-      child: MyApp(),
-    ),
-  );
+  await Hive.openBox<bool>(HiveConstants.themeBox);
 }
 
 class MyApp extends StatelessWidget {
@@ -31,11 +37,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'TODO',
-      theme: lightTheme,
-      darkTheme: lightTheme,
-      home: const HomeScren(),
+    return ValueListenableBuilder(
+      valueListenable: Hive.box<bool>(HiveConstants.themeBox).listenable(),
+      builder: (BuildContext context, value, Widget? child) {
+        var darkMode = Hive.box<bool>(HiveConstants.themeBox).get(HiveConstants.themeKey, defaultValue: false);
+        return MaterialApp(
+          title: 'TODO',
+          theme: lightTheme,
+          darkTheme: darkTheme,
+          themeMode: darkMode! ? ThemeMode.dark : ThemeMode.light,
+          home: const HomeScren(),
+        );
+      },
     );
   }
 }

@@ -9,6 +9,7 @@ import '../data/todo_repository.dart';
 import '../domain/todo.dart';
 import 'add_todo_screen.dart';
 import 'widgets/completed_todo_card.dart';
+import 'widgets/theme_switch_fab.dart';
 import 'widgets/todo_card.dart';
 
 class HomeScren extends StatefulWidget {
@@ -49,17 +50,24 @@ class _HomeScrenState extends State<HomeScren> {
     );
   }
 
-  FloatingActionButton _floatingActionButton(BuildContext context) {
-    return FloatingActionButton(
-      backgroundColor: AppColors.arsenic,
-      child: const Icon(Icons.add, size: 40),
-      onPressed: () {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (BuildContext context) => const AddTodoScreen(),
-          ),
-        );
-      },
+  Widget _floatingActionButton(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        const ThemeSwitchFAB(),
+        FloatingActionButton(
+          heroTag: "addTodo",
+          backgroundColor: AppColors.arsenic,
+          child: const Icon(Icons.add, size: 40),
+          onPressed: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (BuildContext context) => const AddTodoScreen(),
+              ),
+            );
+          },
+        ),
+      ],
     );
   }
 

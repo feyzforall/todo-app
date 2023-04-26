@@ -11,4 +11,6 @@ class HiveConstants {
 
   static const String todoBox = 'todoBox';
   static const String completedTodoBox = 'completedTodoBox';
+  static const String themeBox = 'themeBox';
+  static const String themeKey = 'themeKey';
 }
