@@ -41,7 +41,7 @@ ThemeData darkTheme = ThemeData(
     color: AppColors.lightSilver,
   ),
   cardColor: AppColors.oldSilver.withOpacity(0.5),
-  disabledColor: AppColors.oldSilver,
+  disabledColor: AppColors.chineseBlack,
   fontFamily: GoogleFonts.openSans().fontFamily,
   textTheme: TextTheme(
     // 22px : ("Yapılacaklar", "Tamamlanan" gibi başlıklarda kullanılıyor)

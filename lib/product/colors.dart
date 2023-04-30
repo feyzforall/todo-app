@@ -24,6 +24,7 @@ class AppColors {
   static const Color oldSilver = Color(0xDD828282);
   static const Color silverFoil = Color(0xFFAEAEAE);
   static const Color cultured = Color(0xFFF8F8F8);
+  static const Color chineseBlack = Color(0xFF131313);
 
   static const Map<String, Color> todoColors = {
     tartOrangeString: tartOrange,

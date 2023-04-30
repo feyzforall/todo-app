@@ -37,7 +37,7 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        backgroundColor: widget.todo != null ? widget.todo?.color.toColor() : Theme.of(context).scaffoldBackgroundColor,
         leading: const LeadingButton(),
       ),
       bottomNavigationBar: Consumer(
